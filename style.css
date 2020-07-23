@@ -9,3 +9,7 @@ h1, html{
   justify-content:center;
   align-items:center;
 }
+
+pre {
+  text-align: left;
+}
