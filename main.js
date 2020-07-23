@@ -1,3 +1,11 @@
+// Developer Icon
+if (location.hostname === 'localhost') {
+  document.querySelector('[rel=icon]').remove()
+  const link = document.createElement('link')
+  link.href = './icon-dev.svg'
+  link.rel = 'icon'
+  document.head.append(link)
+}
 const upload = document.getElementsByTagName("input")[0];
 const worker = new Worker("./workers/metadata.js");
 
