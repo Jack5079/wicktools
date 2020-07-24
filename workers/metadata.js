@@ -1,4 +1,4 @@
-import JSZip from 'https://cdn.skypack.dev/jszip'
+import JSZip from "https://cdn.skypack.dev/jszip";
 
 /**
  * @param {MessageEvent} event
@@ -9,12 +9,11 @@ async function meta(event) {
    */
   const { blob, type } = event.data;
   const zip = await new JSZip().loadAsync(blob);
+  const project = JSON.parse(
+    await zip.file("project.json")?.async("text") || "{}",
+  );
   switch (type) {
     case "bruh":
-      const project = JSON.parse(
-        await zip.file("project.json")?.async("text") || "{}",
-      );
-      
       // this replaces every text with "bruh"
       // Clips, text, paths, etc. are stored in the project.json file. We will get the IDs of every single object, and filter it to only text.
       Object.keys(project.objects)
@@ -28,14 +27,11 @@ async function meta(event) {
 
       const output = await zip.file("project.json", JSON.stringify(project))
         .generateAsync({ type: "blob" });
-      
+
       self.postMessage(output);
       break;
     default:
-      const text = JSON.parse(
-        await zip.file("project.json")?.async("text") || "{}",
-      );
-      self.postMessage(text);
+      self.postMessage(project);
       break;
   }
 }
