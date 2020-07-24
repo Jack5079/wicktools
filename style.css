@@ -4,12 +4,29 @@ html {
   height: 100%;
 }
 
-h1, html{
-  display:flex;
-  justify-content:center;
-  align-items:center;
+h1, html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 pre {
   text-align: left;
+}
+
+fieldset {
+  border-radius: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  fieldset {
+    border-color: darkgray;
+  }
+  html {
+    background: black;
+    color: darkgray;
+  }
+  pre {
+    color: white;
+  }
 }
