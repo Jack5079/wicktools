@@ -92,5 +92,6 @@ upload.addEventListener("change", async () => {
     });
     overview.append(header, data, button, ...objects);
     document.body.replaceWith(overview);
+    document.documentElement.style.alignItems = 'initial'
   }
 });
