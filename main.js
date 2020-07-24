@@ -7,7 +7,7 @@ if (location.hostname === "localhost") {
   document.head.append(link);
 }
 const upload = document.getElementsByTagName("input")[0];
-const worker = new Worker("./workers/metadata.js");
+const worker = new Worker("./workers/metadata.js", {type: 'module'});
 
 /**
  * 

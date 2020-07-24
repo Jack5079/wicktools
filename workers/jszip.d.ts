@@ -58,7 +58,7 @@ interface OutputByType {
 
 type InputFileFormat = InputByType[keyof InputByType];
 
-declare namespace JSZip {
+declare module "https://cdn.skypack.dev/jszip" {
     type InputType = keyof InputByType;
 
     type OutputType = keyof OutputByType;
@@ -264,5 +264,3 @@ interface JSZip {
     };
     version: string;
 }
-
-declare var JSZip: JSZip;

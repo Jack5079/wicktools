@@ -3,7 +3,6 @@
     "lib": [
       "esnext",
       "dom"
-    ],
-    "checkJs": true
+    ]
   }
 }

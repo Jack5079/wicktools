@@ -1,4 +1,4 @@
-importScripts("../jszip.min.js");
+import JSZip from 'https://cdn.skypack.dev/jszip'
 
 /**
  * @param {MessageEvent} event
