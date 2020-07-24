@@ -1,10 +1,10 @@
 // Developer Icon
-if (location.hostname === 'localhost') {
-  document.querySelector('[rel=icon]').remove()
-  const link = document.createElement('link')
-  link.href = './icon-dev.svg'
-  link.rel = 'icon'
-  document.head.append(link)
+if (location.hostname === "localhost") {
+  document.querySelector("[rel=icon]").remove();
+  const link = document.createElement("link");
+  link.href = "./icon-dev.svg";
+  link.rel = "icon";
+  document.head.append(link);
 }
 const upload = document.getElementsByTagName("input")[0];
 const worker = new Worker("./workers/metadata.js");
@@ -46,8 +46,17 @@ function bruh(blob) {
 upload.addEventListener("change", async () => {
   const file = upload.files?.[0];
   if (file) {
-    const meta = await getMetadata(file);
-    const objects = Object.values(meta.objects)
+    const {
+      project: {
+        width,
+        height,
+        framerate,
+        name,
+        metadata: { platform: { description: platform }, wickengine },
+      },
+      objects,
+    } = await getMetadata(file);
+    const scripts = Object.values(objects)
       .filter(({ scripts }) => scripts) // Only objects with a script array
       .map((object) => ({
         scripts: object.scripts.filter((script) => script.src),
@@ -76,9 +85,9 @@ upload.addEventListener("change", async () => {
     const header = document.createElement("h1");
     const data = document.createElement("p");
     const button = document.createElement("button");
-    header.innerText = meta.project.name;
+    header.innerText = name;
     data.innerText =
-      `${meta.project.width}x${meta.project.height}@${meta.project.framerate}\nLast saved with Wick Engine ${meta.project.metadata.wickengine} and ${meta.project.metadata.platform.description}`;
+      `${width}x${height}@${framerate}\nLast saved with Wick Engine ${wickengine} and ${platform}`;
     button.innerText = "Bruhify";
     button.addEventListener("click", async () => {
       const blob = await bruh(file);
@@ -90,8 +99,8 @@ upload.addEventListener("change", async () => {
       link.click();
       link.remove();
     });
-    overview.append(header, data, button, ...objects);
+    overview.append(header, data, button, ...scripts);
     document.body.replaceWith(overview);
-    document.documentElement.style.alignItems = 'initial'
+    document.documentElement.style.alignItems = "initial";
   }
 });
