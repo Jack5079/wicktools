@@ -24,7 +24,9 @@ async function meta(event) {
         .forEach((id) => { // Now for the actual text replacement
           project.objects[id].json[1].content = "bruh";
         });
-
+      /**
+       * @type {Blob}
+       */
       const output = await zip.file("project.json", JSON.stringify(project))
         .generateAsync({ type: "blob" });
 
